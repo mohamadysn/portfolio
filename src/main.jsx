@@ -1,6 +1,7 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
+import portrait from './profile3.png'
 
 const projects = [
   {
@@ -15,7 +16,9 @@ const projects = [
     title: 'Legume scRNA-seq Portal',
     text: 'Interactive exploration of multiple single-cell RNA-seq datasets with UMAP, differential expression, volcano plots and dot plots.',
     tech: ['R', 'Shiny', 'scRNA-seq', 'Visualization'],
-    accent: '02'
+    accent: '02',
+    link: 'https://legumes-singlecell-atlas.sk8.inrae.fr/',
+    linkLabel: 'Open the portal'
   },
   {
     tag: 'Multi-omics',
@@ -29,14 +32,18 @@ const projects = [
     title: 'Translatome Analysis',
     text: 'Analysis of total and polysomal RNA-seq, differential expression, and an interactive interface for cell-type translatome exploration.',
     tech: ['RNA-seq', 'R', 'Shiny', 'Differential analysis'],
-    accent: '04'
+    accent: '04',
+    link: 'https://www.biorxiv.org/content/10.64898/2026.04.29.721592v1',
+    linkLabel: 'View preprint'
   },
   {
     tag: 'Genomics software',
     title: 'Crossover Detection Tool',
     text: 'Python-based tooling for detecting and characterizing meiotic crossover events from genomic data.',
     tech: ['Python', 'Genomics', 'Data processing'],
-    accent: '05'
+    accent: '05',
+    link: 'https://www.nature.com/articles/s41467-026-76213-z',
+    linkLabel: 'View publication'
   },
   {
     tag: 'Workflow engineering',
@@ -49,7 +56,7 @@ const projects = [
 
 const experience = [
   ['2024–2026', 'Sciences des Plantes de Saclay / INRAE Paris-Saclay', 'Bioinformatics Engineer', 'Genomics, transcriptomics, multi-omics, scientific software and HPC workflows across collaborative research teams.'],
-  ['2022–2024', 'INCI Strasbourg', 'Bioinformatics apprenticeship & internship', 'Transcriptome, methylome and histone-mark analyses with reproducible computational workflows.'],
+  ['2022–2024', 'INCI Strasbourg', 'Bioinformatics apprenticeship & internship', 'Transcriptome, methylome and histone-mark analyses with reproducible computational workflows.', 'https://www.biorxiv.org/content/10.1101/2025.10.27.684830v1'],
   ['2019–2021', 'CEA SHFJ · LPHI · IRD', 'Research internships', 'Early research experience spanning immunology, parasitology and cell biology.']
 ]
 
@@ -94,22 +101,10 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-visual" aria-hidden="true">
+          <div className="hero-visual">
             <div className="orb orb-one"></div>
             <div className="orb orb-two"></div>
-            <div className="visual-card card-a">
-              <span className="mini-label">GENOMICS</span>
-              <div className="dna-lines">
-                {Array.from({length: 8}).map((_, i) => <i key={i}></i>)}
-              </div>
-            </div>
-            <div className="visual-card card-b">
-              <span className="mini-label">PIPELINES</span>
-              <div className="pipeline">
-                <b>FASTQ</b><em>→</em><b>QC</b><em>→</em><b>ANALYSIS</b>
-              </div>
-            </div>
-            <div className="stat-card"><strong>9+</strong><span>scRNA-seq datasets</span></div>
+            <img className="portrait" src={portrait} alt="Mohamad Yassine" />
           </div>
         </section>
 
@@ -146,6 +141,9 @@ function App() {
                   <h3>{project.title}</h3>
                   <p>{project.text}</p>
                   <div className="tech-row">{project.tech.map(t => <span key={t}>{t}</span>)}</div>
+                  {project.link && (
+                    <a className="project-link" href={project.link} target="_blank" rel="noreferrer">{project.linkLabel} ↗</a>
+                  )}
                 </article>
               ))}
             </div>
@@ -158,11 +156,18 @@ function App() {
             <h2>A path across research and engineering</h2>
           </div>
           <div className="timeline">
-            {experience.map(([date, org, role, desc]) => (
+            {experience.map(([date, org, role, desc, link]) => (
               <div className="timeline-row" key={date + org}>
                 <div className="time">{date}</div>
                 <div className="dot"></div>
-                <div className="timeline-content"><p>{org}</p><h3>{role}</h3><span>{desc}</span></div>
+                <div className="timeline-content">
+                  <p>{org}</p>
+                  <h3>{role}</h3>
+                  <span>{desc}</span>
+                  {link && (
+                    <a className="project-link" href={link} target="_blank" rel="noreferrer">View preprint ↗</a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -212,6 +217,7 @@ function App() {
               <div className="contact-links">
                 <a href="https://github.com/mohamadysn" target="_blank" rel="noreferrer">GitHub ↗</a>
                 <a href="https://www.linkedin.com/in/mohamad-ysn/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+                <a href="https://orcid.org/0009-0008-3233-7501" target="_blank" rel="noreferrer">ORCID ↗</a>
                 <a href="mailto:mohamad.a.ysn@gmail.com">Email ↗</a>
               </div>
             </div>
